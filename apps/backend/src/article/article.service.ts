@@ -8,6 +8,7 @@ import { Article } from './article.entity';
 import { IArticleRO, IArticlesRO, ICommentsRO } from './article.interface';
 import { Comment } from './comment.entity';
 import { CreateArticleDto, CreateCommentDto } from './dto';
+import { Tag } from '../tag/tag.entity';
 
 @Injectable()
 export class ArticleService {
@@ -19,6 +20,9 @@ export class ArticleService {
     private readonly commentRepository: EntityRepository<Comment>,
     @InjectRepository(User)
     private readonly userRepository: EntityRepository<User>,
+    // inject Tag entity repository in exactly the same way as Article, Comment and User above
+    @InjectRepository(Tag)
+    private readonly tagRepository: EntityRepository<Tag>,
   ) {}
 
   async findAll(userId: number, query: Record<string, string>): Promise<IArticlesRO> {
@@ -156,6 +160,19 @@ export class ArticleService {
     const article = new Article(user!, dto.title, dto.description, dto.body);
     article.tagList.push(...dto.tagList);
     user?.articles.add(article);
+
+    // add all article tags from the article.tagList property to the tag repository
+    // don't use deprecated `.persistAndFlush()` method
+    for (const tag of article.tagList) {
+
+        // if the tag does not exist in the tag repository, create it
+        if (!await this.tagRepository.findOne({ tag })) {
+            const newTag = new Tag();
+            newTag.tag = tag;
+            await this.em.persistAndFlush(newTag);
+        }
+    }
+
     await this.em.flush();
 
     return { article: article.toJSON(user!) };

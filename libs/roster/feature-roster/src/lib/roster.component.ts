@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'realworld-roster',
+  selector: 'cdt-roster',
   templateUrl: './roster.component.html',
   styleUrls: ['./roster.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

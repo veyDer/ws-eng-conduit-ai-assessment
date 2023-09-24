@@ -1,7 +1,7 @@
-import { Roster } from "@realworld/core/api-types/src";
+import { Roster } from '@realworld/core/api-types/src';
 
 export interface RosterState {
-    data: Roster;
-    loading: boolean;
-    loaded: boolean;
-};
+  data: Roster;
+  loading: boolean;
+  loaded: boolean;
+}

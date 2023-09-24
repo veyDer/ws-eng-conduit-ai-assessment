@@ -29,7 +29,7 @@ export const publishArticle$ = createEffect(
             publishArticleInput.tagList = publishArticleInput.tagList.split(',').map((tag: string) => tag.trim());
         }
 
-        return articlesService.publishArticle(publishArticleInput as Article).pipe(
+        return articlesService.publishArticle(publishArticleInput as unknown as Article).pipe(
           tap((result) => router.navigate(['article', result.article.slug])),
           map(() => articleEditActions.publishArticleSuccess()),
           catchError((result) => of(formsActions.setErrors({ errors: result.error.errors }))),

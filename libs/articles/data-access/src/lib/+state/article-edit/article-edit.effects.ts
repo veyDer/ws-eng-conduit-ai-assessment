@@ -26,15 +26,16 @@ export const publishArticle$ = createEffect(
         const publishArticleInput = { ...data };
 
         if (typeof publishArticleInput.tagList === 'string') {
-            publishArticleInput.tagList = publishArticleInput.tagList.split(',').map((tag: string) => tag.trim());
+          publishArticleInput.tagList = publishArticleInput.tagList.split(',').map((tag: string) => tag.trim());
         }
 
+        // @TODO: deliberate double assertion needs to be taken care of, not in the scope of this task
         return articlesService.publishArticle(publishArticleInput as unknown as Article).pipe(
           tap((result) => router.navigate(['article', result.article.slug])),
           map(() => articleEditActions.publishArticleSuccess()),
           catchError((result) => of(formsActions.setErrors({ errors: result.error.errors }))),
-        )},
-      ),
+        );
+      }),
     );
   },
   { functional: true },

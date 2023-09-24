@@ -48,6 +48,11 @@ export const appConfig: ApplicationConfig = {
         path: 'profile',
         loadChildren: () => import('@realworld/profile/feature-profile').then((profile) => profile.PROFILE_ROUTES),
       },
+      // add a route for `roster` component imported from `@realworld/roster/feature-roster` (don't use `loadChildren` but `loadComponent` instead)
+      {
+        path: 'roster',
+        loadComponent: () => import('@realworld/roster/feature-roster').then((roster) => roster.RosterComponent),
+      },
     ]),
     provideStore({
       auth: authFeature.reducer,

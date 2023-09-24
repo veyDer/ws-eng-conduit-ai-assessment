@@ -1,1 +1,1 @@
-export * from './lib/roster-feature-roster.module';
+export * from './lib/roster.component';

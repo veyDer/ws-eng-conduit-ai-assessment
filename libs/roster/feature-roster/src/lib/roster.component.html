@@ -1,0 +1,39 @@
+<!-- the code for roster-page -->
+<div class="roster-page">
+    <div class="container page">
+      <div class="row">
+        <div class="col-md-6 offset-md-3 col-xs-12">
+          <h1 class="text-xs-center">Conduit Roster</h1>
+          <!-- table of Roster objects (username, number of articles authored, likes received, date of first article) -->
+            <table class="table table-hover table-bordered">
+                <thead>
+                <tr>
+                    <th scope="col">Username</th>
+                    <th scope="col">Articles Authored</th>
+                    <th scope="col">Likes Received</th>
+                    <th scope="col">Date of First Article</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let roster of roster$ | async">
+                    <!-- generate table cells according to the following `RosterSingle` interface declaration:
+                    interface RosterSingle {
+                        authorProfile: Profile;
+                        articlesAuthoredCount: number;
+                        likesReceivedOnArticlesCount: number;
+                        firstArticleDate: string;
+                    }
+                    Make the username a clickable link to the "/profile" page with the username as a route parameter.
+                    -->
+                    <td><a [routerLink]="['/profile', roster.authorProfile.username]">{{roster.authorProfile.username}}</a></td>
+                    <td>{{roster.articlesAuthoredCount}}</td>
+                    <td>{{roster.likesReceivedOnArticlesCount}}</td>
+                    <td>{{roster.firstArticleDate}}</td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+      </div>
+    </div>
+</div>

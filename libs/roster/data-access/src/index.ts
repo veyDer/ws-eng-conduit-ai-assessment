@@ -1,1 +1,1 @@
-export * from './lib/roster-data-access.module';
+export * from './lib';

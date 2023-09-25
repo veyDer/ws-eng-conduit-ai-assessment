@@ -10,6 +10,7 @@ import { provideEffects } from '@ngrx/effects';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { API_URL } from '@realworld/core/http-client';
 import { environment } from '../environments/environment';
+import { rosterEffects, rosterFeature } from '@realworld/roster/data-access';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter([
@@ -58,8 +59,9 @@ export const appConfig: ApplicationConfig = {
       auth: authFeature.reducer,
       errorHandler: errorHandlerFeature.reducer,
       ngrxForms: ngrxFormsFeature.reducer,
+      roster: rosterFeature.reducer,
     }),
-    provideEffects(errorHandlerEffects, ngrxFormsEffects, authFunctionalEffects),
+    provideEffects(errorHandlerEffects, ngrxFormsEffects, authFunctionalEffects, rosterEffects),
     provideRouterStore(),
     provideHttpClient(withInterceptors([errorHandlingInterceptor, tokenInterceptor])),
     !environment.production ? provideStoreDevtools() : [],

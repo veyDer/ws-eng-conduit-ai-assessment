@@ -10,6 +10,7 @@ import { provideEffects } from '@ngrx/effects';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { API_URL } from '@realworld/core/http-client';
 import { environment } from '../environments/environment';
+import { rosterEffects, rosterFeature } from '@realworld/roster/data-access';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter([
@@ -48,13 +49,19 @@ export const appConfig: ApplicationConfig = {
         path: 'profile',
         loadChildren: () => import('@realworld/profile/feature-profile').then((profile) => profile.PROFILE_ROUTES),
       },
+      // add a route for `roster` component imported from `@realworld/roster/feature-roster` (don't use `loadChildren` but `loadComponent` instead)
+      {
+        path: 'roster',
+        loadComponent: () => import('@realworld/roster/feature-roster').then((roster) => roster.RosterComponent),
+      },
     ]),
     provideStore({
       auth: authFeature.reducer,
       errorHandler: errorHandlerFeature.reducer,
       ngrxForms: ngrxFormsFeature.reducer,
+      roster: rosterFeature.reducer,
     }),
-    provideEffects(errorHandlerEffects, ngrxFormsEffects, authFunctionalEffects),
+    provideEffects(errorHandlerEffects, ngrxFormsEffects, authFunctionalEffects, rosterEffects),
     provideRouterStore(),
     provideHttpClient(withInterceptors([errorHandlingInterceptor, tokenInterceptor])),
     !environment.production ? provideStoreDevtools() : [],

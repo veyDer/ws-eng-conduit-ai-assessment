@@ -10,7 +10,7 @@ export const loadRoster$ = createEffect(
       ofType(rosterActions.loadRoster),
       concatMap(() =>
         rosterService.getRoster().pipe(
-          map((response) => rosterActions.loadRosterSuccess({ roster: response.data })),
+          map((response) => rosterActions.loadRosterSuccess({ roster: response })),
           catchError(() => of(rosterActions.loadRosterFailure())),
         ),
       ),

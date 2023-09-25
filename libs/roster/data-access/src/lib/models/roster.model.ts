@@ -1,4 +1,4 @@
-import { Roster } from '@realworld/core/api-types/src';
+import { Roster } from '@realworld/core/api-types';
 
 export interface RosterState {
   data: Roster;

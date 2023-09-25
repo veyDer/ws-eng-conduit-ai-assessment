@@ -13,8 +13,7 @@ import { RosterModule } from './roster/roster.module';
   controllers: [AppController],
   // imports: [MikroOrmModule.forRoot(ormConfig), ArticleModule, UserModule, ProfileModule, TagModule],
   // rewrite the line above by adding the RosterModule in the list of imports
-    imports: [MikroOrmModule.forRoot(ormConfig), ArticleModule, UserModule, ProfileModule, TagModule, RosterModule],
-
+  imports: [MikroOrmModule.forRoot(ormConfig), ArticleModule, UserModule, ProfileModule, TagModule, RosterModule],
 
   providers: [],
 })

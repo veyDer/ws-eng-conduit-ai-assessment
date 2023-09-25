@@ -38,10 +38,10 @@ export class RosterController {
       const firstArticleDate = articles.length ? articles[0].createdAt.toISOString() : '';
       return {
         authorProfile: {
-            username: user.username,
-            bio: user.bio,
-            image: user.image,
-            following: false,
+          username: user.username,
+          bio: user.bio,
+          image: user.image,
+          following: false,
         },
         articlesAuthoredCount,
         likesReceivedOnArticlesCount,

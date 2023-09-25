@@ -1,4 +1,4 @@
-import { IProfileData } from "../profile/profile.interface";
+import { IProfileData } from '../profile/profile.interface';
 
 /* generate and export the RosterSingleRO interface with the following properties:
   authorProfile: IProfileData;
